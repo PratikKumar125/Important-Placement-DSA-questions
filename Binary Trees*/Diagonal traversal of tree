@@ -1,0 +1,18 @@
+class Solution:
+    def solve(self, node, v):
+        if node == None:
+            return
+        if v in self.res:
+            self.res[v].append(node.data)
+        else:
+            self.res[v] = [node.data]
+        self.solve(node.left, v + 1)
+        self.solve(node.right, v)
+    def diagonal(self,root):
+        self.res = {}
+        ans = []
+        self.solve(root, 0)
+        for key in sorted(self.res.keys()):
+            for x in self.res[key]:
+                ans.append(x)
+        return ans
