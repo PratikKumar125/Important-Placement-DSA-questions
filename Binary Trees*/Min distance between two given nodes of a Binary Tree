@@ -1,0 +1,28 @@
+class Solution:
+    def findDist(self,root,a,b):
+        def LCA(node, p, q):
+            if node == None:
+                return None
+            if node.data == a or node.data == b:
+                return node
+            lca_left = LCA(node.left, p, q)
+            lca_right = LCA(node.right, p, q)
+            if lca_right and lca_left:
+                return node
+            elif lca_left:
+                return lca_left
+            elif lca_right:
+                return lca_right
+            else:
+                return None
+        
+        def height(node2, x):
+            if node2 == None:
+                return float("inf")
+            if node2.data == x:
+                return 0
+            return 1 + min(height(node2.left, x), height(node2.right, x))
+        lca_node = LCA(root, a, b)
+        a_height = height(lca_node, a)
+        b_height = height(lca_node, b)
+        return a_height + b_height
