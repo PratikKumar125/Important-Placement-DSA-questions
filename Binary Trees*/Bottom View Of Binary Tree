@@ -1,0 +1,19 @@
+class Solution:
+    def bottomView(self, root):
+        mymap = defaultdict(list)
+        q = []
+        q.append((root, 0))
+        ans = []
+        while len(q)> 0:
+            temp = q.pop(0)
+            line = temp[1]
+            val = temp[0]
+            mymap[line] = val.data
+            if val.left:
+                q.append((val.left, line - 1))
+            if val.right:
+                q.append((val.right, line + 1))
+        for i in sorted(mymap.keys()):
+            temp = mymap[i]
+            ans.append(temp)
+        return ans
