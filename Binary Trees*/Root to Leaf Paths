@@ -1,0 +1,16 @@
+def Paths(root):
+    ans = []
+    def findSol(root, arr):
+        if root.left == None and root.right == None:
+            arr.append(root.data)
+            ans.append(arr.copy())
+            arr.pop(-1)
+            return;
+        arr.append(root.data)
+        if root.left:
+            findSol(root.left, arr)
+        if root.right:
+            findSol(root.right, arr)
+        arr.pop(-1)
+    findSol(root, [])
+    return ans
