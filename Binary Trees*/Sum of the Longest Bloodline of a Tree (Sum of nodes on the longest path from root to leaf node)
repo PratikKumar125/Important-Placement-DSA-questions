@@ -1,0 +1,16 @@
+class Solution:
+    def find(self, node, curr_len, curr_sum):
+        if node == None:
+            if self.max_len < curr_len:
+                self.max_len = curr_len
+                self.ans = curr_sum
+            elif self.max_len == curr_len:
+                self.ans = max(self.ans, curr_sum)
+            return;
+        self.find(node.left, curr_len + 1, curr_sum + node.data)
+        self.find(node.right, curr_len + 1, curr_sum + node.data)
+    def sumOfLongRootToLeafPath(self,root):
+        self.ans = 0
+        self.max_len = 0
+        self.find(root, 0, 0)
+        return self.ans
