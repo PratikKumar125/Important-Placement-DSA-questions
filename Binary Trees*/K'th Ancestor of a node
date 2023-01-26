@@ -1,0 +1,17 @@
+def getPath(root, arr, node):
+    if root == None:
+        return False
+    arr.append(root.data)
+    if root.data == node:
+        return True
+    if (getPath(root.left, arr, node) or getPath(root.right, arr, node)):
+        return True
+    arr.pop()
+    return False
+    
+def kthAncestor(root, k, node):
+    arr = []
+    getPath(root, arr, node)
+    if len(arr) > k:
+        return arr[len(arr) - k - 1]
+    return -1
