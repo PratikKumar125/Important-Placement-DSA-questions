@@ -1,0 +1,13 @@
+class Solution:
+    def toSumTree(self, root) :
+        #code here
+        self.find(root)
+        return root
+    def find(self, node):
+        if node == None:
+            return 0
+        l = self.find(node.left)
+        r = self.find(node.right)
+        temp = node.data
+        node.data = l + r
+        return l + r + temp
