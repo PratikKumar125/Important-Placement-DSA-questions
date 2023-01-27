@@ -1,0 +1,14 @@
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        self.ans = -float("inf")
+        def solve(root):
+            if root == None:
+                return 0
+            l = solve(root.left)
+            r = solve(root.right)
+            straight = max(root.val, root.val + l, root.val + r)
+            curved = l + r + root.val
+            self.ans = max(self.ans, max(straight, curved))
+            return straight
+        solve(root)
+        return self.ans
