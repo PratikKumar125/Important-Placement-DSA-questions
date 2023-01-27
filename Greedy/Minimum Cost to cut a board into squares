@@ -1,0 +1,27 @@
+class Solution:
+    def minimumCostOfBreaking(self,X : List[int], Y : List[int],M : int, N : int) -> int:
+        horizontal_cuts = 1
+        vertical_cuts = 1
+        X.sort()
+        Y.sort()
+        m = len(X) - 1
+        n = len(Y) - 1
+        cost = 0
+        while(m >= 0 and n >= 0):
+            if X[m] >= Y[n]:
+                cost += (vertical_cuts * X[m])
+                horizontal_cuts += 1
+                m -= 1
+            else:
+                cost += (horizontal_cuts * Y[n])
+                vertical_cuts += 1
+                n -= 1
+        while(m >= 0):
+            cost += (vertical_cuts * X[m])
+            horizontal_cuts += 1
+            m -= 1
+        while(n >= 0):
+            cost += (horizontal_cuts * Y[n])
+            vertical_cuts += 1
+            n -= 1            
+        return cost
