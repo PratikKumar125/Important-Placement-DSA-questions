@@ -1,0 +1,11 @@
+    def solve(self, A):
+        ans = 0
+        heap = []
+        A.sort(key = lambda x : x[0])
+        for i in A:
+            if len(heap) == 0 or i[0] < heap[0]:
+                ans += 1
+            else:
+                heapq.heappop(heap)
+            heapq.heappush(heap, i[1])  
+        return ans
