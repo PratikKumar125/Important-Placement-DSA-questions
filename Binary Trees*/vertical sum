@@ -1,0 +1,18 @@
+import collections
+class Solution:
+    def verticalSum(self, A):
+        mymap = {}
+        self.solve(A, 0, mymap)
+        ans = []
+        for i in sorted(mymap.keys()):
+            ans.append(mymap[i])
+        return ans
+    def solve(self, root, vertical, mymap):
+        if vertical in mymap:
+            mymap[vertical] += root.val
+        else:
+            mymap[vertical] = root.val
+        if root.left:
+            self.solve(root.left, vertical - 1, mymap)
+        if root.right:
+            self.solve(root.right, vertical + 1, mymap)
