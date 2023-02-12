@@ -1,0 +1,18 @@
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root == None:
+            return None
+        else:
+            q = []
+            q.append(root)
+            while(len(q) > 0):
+                for i in range(len(q)):
+                    temp = q.pop(0)
+                    if len(q) >= 1:
+                        temp.next = q[0]
+                    if temp.left:
+                        q.append(temp.left)
+                    if temp.right:
+                        q.append(temp.right)
+                temp.next = None
+            return root
