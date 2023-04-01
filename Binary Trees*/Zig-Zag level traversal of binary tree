@@ -1,0 +1,26 @@
+https://practice.geeksforgeeks.org/problems/zigzag-tree-traversal/1
+
+
+class Solution:
+    #Function to store the zig zag order traversal of tree in a list.
+    def zigZagTraversal(self, root):
+        ltor = True
+        q = []
+        q.append(root)
+        ans = []
+        while(len(q) > 0):
+            row = []
+            for i in range(len(q) - 1, -1, -1):
+                temp = q.pop(0)
+                if temp.left:
+                    q.append(temp.left)
+                if temp.right:
+                    q.append(temp.right)
+                if ltor == True:
+                    row.append(temp.data)
+                if ltor == False:
+                    row.insert(0, temp.data)
+            for i in row:
+                ans.append(i)
+            ltor = not ltor
+        return ans
