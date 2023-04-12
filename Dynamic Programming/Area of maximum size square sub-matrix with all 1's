@@ -1,0 +1,18 @@
+###### Given a 2D binary matrix A of size  N x M  find the area of maximum size square sub-matrix with all 1's. ######
+Given a 2D binary matrix A of size  N x M  find the area of maximum size square sub-matrix with all 1's.
+https://www.interviewbit.com/problems/maximum-size-square-sub-matrix/
+
+
+class Solution:
+    # @param arr : list of list of integers
+    # @return an integer
+    def solve(self, arr):
+        ans = 1
+        for i in range(len(arr) - 2, -1, -1):
+            for j in range(len(arr[0]) - 2, -1, -1):
+                if arr[i][j] == 0:
+                    continue
+                else:
+                    arr[i][j] = min(arr[i + 1][j], arr[i][j + 1], arr[i + 1][j + 1]) + 1
+                    ans = max(ans, arr[i][j])
+        return ans * ans
