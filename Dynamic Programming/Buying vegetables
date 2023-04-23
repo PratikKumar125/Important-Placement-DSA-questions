@@ -1,0 +1,20 @@
+https://practice.geeksforgeeks.org/problems/buying-vegetables0016/1?category=
+
+Geek wants to inspect the quality of vegetables at each shop in the vegetable market. There are N different vegetable sellers in a line. A single kilogram each of brinjal, carrot and tomato are available with every seller but at different prices. Geek wants to buy exactly one vegetable from one shop and avoid buying the same vegetables from adjacent shops. 
+Given the cost of each vegetable in each shop in a Nx3 matrix, calculate the minimum amount of money that Geek must spend in the inspection. 
+
+
+class Solution:
+    def minCost(self, N, cost):
+        # code here
+        for i in range(1, len(cost)):
+            for j in range(len(cost[0])):
+                curr_min = float("inf")
+                for k in range(3):
+                    if j != k:
+                        curr_min = min(curr_min, cost[i - 1][k])
+                cost[i][j] += curr_min
+        ans = float("inf")
+        for i in range(3):
+            ans = min(ans, cost[-1][i])
+        return ans
