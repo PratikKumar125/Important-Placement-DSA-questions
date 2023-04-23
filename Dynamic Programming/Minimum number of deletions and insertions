@@ -1,0 +1,33 @@
+Given two strings str1 and str2. The task is to remove or insert the minimum number of characters from/in str1 so as to transform it into str2. It could be possible that the same character needs to be removed/deleted from one point of str1 and inserted to some another point.
+
+Example 1:
+
+Input: str1 = "heap", str2 = "pea"
+Output: 3
+Explanation: 2 deletions and 1 insertion
+p and h deleted from heap. Then, p is 
+inserted at the beginning One thing to 
+note, though p was required yet it was 
+removed/deleted first from its position 
+and then it is inserted to some other 
+position. Thus, p contributes one to the 
+deletion_count and one to the 
+insertion_count.
+
+
+class Solution:
+	def minOperations(self, s1, s2):
+        def lcs(x,y,s1,s2):
+            dp = [[0 for j in range(x + 1)] for i in range(y + 1)]
+            for i in range(len(dp) - 2, -1, -1):
+                for j in range(len(dp[0]) - 2, -1, -1):
+                    if s2[i] == s1[j]:
+                        dp[i][j] = 1 + dp[i + 1][j + 1]
+                    else:
+                        dp[i][j] = max(dp[i][j + 1], dp[i + 1][j])
+            return dp[0][0]
+        # return len(s1) + len(s2) - (2 * lcs(len(s1), len(s2), s1, s2))
+        x = len(s1)
+        y = len(s2)
+        LCS = lcs(x, y, s1, s2)
+        return (x - LCS) + (y - LCS)
