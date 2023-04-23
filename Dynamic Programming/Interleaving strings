@@ -1,0 +1,24 @@
+https://www.interviewbit.com/problems/interleaving-strings/
+
+class Solution:
+	# @param A : string
+	# @param B : string
+	# @param C : string
+	# @return an integer
+	def isInterleave(self, A, B, C):
+        def solve(i, j, k, a, b, c, map):
+            key = str(i) + "#" + str(j)
+            if key in map:
+                return map[key]
+            if i >= len(a) and j >= len(b) and k >= len(c):
+                return 1
+            x, y = 0, 0
+            if i != len(a):
+                if a[i] == c[k]:
+                    x = solve(i + 1, j, k + 1, a, b, c, map)
+            if j != len(b):
+                if b[j] == c[k]:
+                    y = solve(i, j + 1, k + 1, a, b, c, map)
+            map[key] = x or y
+            return x or y
+        return solve(0, 0, 0, A, B, C, {})
