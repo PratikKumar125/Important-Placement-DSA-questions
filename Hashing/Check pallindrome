@@ -1,0 +1,23 @@
+Given a string A consisting of lowercase characters.
+
+Check if characters of the given string can be rearranged to form a palindrome.
+
+Return 1 if it is possible to rearrange the characters of the string A such that it becomes a palindrome else return 0.
+
+class Solution:
+    # @param A : string
+    # @return an integer
+    def solve(self, A):
+        map = {}
+        flag = False
+        for i in A:
+            map[i] = map.get(i, 0) + 1
+        if len(map) == 1:
+            return 1
+        for k, v in map.items():            
+            if v % 2 != 0:
+                if flag == True:
+                    return 0
+                else:
+                    flag = True
+        return 1
